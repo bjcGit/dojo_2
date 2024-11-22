@@ -5,8 +5,9 @@ import * as Yup from "yup";
 import useAxios from "../hooks/useAxios";
 
 interface Code {
-  code: string;
-  isWinner: boolean;
+  nombre: string;
+  identificacion: number;
+  fecha_naci: string;
 }
 
 const TableView = () => {
@@ -21,10 +22,11 @@ const TableView = () => {
 
   const fetchCodes = async () => {
     try {
-      const response = await axios.get("/codes/user-codes");
+      const response = await axios.get("/users");
       const codeList = response.data.codes.map((codeObj: any) => ({
-        code: codeObj.code,
-        isWinner: codeObj.isWinner,
+        nombre: codeObj.nombre,
+        identificacion: codeObj.identificacion,
+        fecha_naci: codeObj.fecha_naci,    
       }));
       setCodes(codeList);
     } catch (error) {
